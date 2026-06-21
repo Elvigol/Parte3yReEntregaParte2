@@ -1,0 +1,46 @@
+<?php
+$pageTitle = $plan->nombre;
+require __DIR__ . '/layout/header.phtml';
+?>
+
+<div class="contenedor-detalle-particular">
+    <?php if (!empty($plan->imagen_url)): ?>
+        <img src="<?= htmlspecialchars($plan->imagen_url) ?>" alt="<?= htmlspecialchars($plan->nombre) ?>" class="imagen-detalle">
+    <?php endif; ?>
+    <h1 class="titulo-principal"><?= htmlspecialchars($plan->nombre) ?></h1>
+    <p><?= htmlspecialchars($plan->descripcion) ?></p>
+    <span class="monto-detalle">$<?= htmlspecialchars($plan->monto_total) ?></span>
+</div>
+
+<h2>Ítems (cuotas) de esta categoría</h2>
+
+<?php if (empty($cuotas)): ?>
+    <p>Todavía no hay cuotas cargadas para esta categoría.</p>
+<?php else: ?>
+    <table>
+        <thead>
+            <tr>
+                <th>Nro. cuota</th>
+                <th>Cliente</th>
+                <th>Monto</th>
+                <th>Estado</th>
+                <th>Detalle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($cuotas as $cuota): ?>
+                <tr>
+                    <td><?= htmlspecialchars($cuota->nro_cuota) ?></td>
+                    <td><?= htmlspecialchars($cuota->nombre_cliente) ?></td>
+                    <td>$<?= htmlspecialchars($cuota->monto) ?></td>
+                    <td><?= $cuota->estado_pago ? 'Pagada' : 'Pendiente' ?></td>
+                    <td><a href="<?= BASE_URL ?>item/<?= $cuota->id_cuota ?>" class="enlace-detalle">Ver</a></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>
+
+<a href="<?= BASE_URL ?>categorias" class="enlace-cancelar">Volver al listado de categorías</a>
+
+<?php require __DIR__ . '/layout/footer.phtml'; ?>

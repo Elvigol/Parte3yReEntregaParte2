@@ -1,0 +1,34 @@
+<?php
+$pageTitle = 'Categorías de Planes de Cuotas';
+require __DIR__ . '/layout/header.phtml';
+?>
+
+<h1 class="titulo-principal">Categorías Disponibles</h1>
+
+<?php if ($isLogged): ?>
+    <a href="<?= BASE_URL ?>nueva-categoria" class="boton-agregar">Agregar nueva categoría</a>
+<?php endif; ?>
+
+<ul class="lista-planes">
+    <?php foreach ($planes as $plan): ?>
+        <li class="item-plan">
+            <?php if (!empty($plan->imagen_url)): ?>
+                <img src="<?= htmlspecialchars($plan->imagen_url) ?>" alt="<?= htmlspecialchars($plan->nombre) ?>" class="imagen-miniatura">
+            <?php endif; ?>
+            <div class="info-plan">
+                <span class="nombre-categoria"><?= htmlspecialchars($plan->nombre) ?></span>
+                <p><?= htmlspecialchars($plan->descripcion) ?></p>
+                <span class="monto">Monto total: $<?= htmlspecialchars($plan->monto_total) ?></span>
+            </div>
+            <div class="acciones">
+                <a href="<?= BASE_URL ?>categoria/<?= $plan->id_plan ?>" class="enlace-detalle">Ver ítems de esta categoría</a>
+                <?php if ($isLogged): ?>
+                    <a href="<?= BASE_URL ?>editar-categoria/<?= $plan->id_plan ?>" class="boton-editar">Editar</a>
+                    <a href="<?= BASE_URL ?>eliminar-categoria/<?= $plan->id_plan ?>" class="boton-eliminar" onclick="return confirm('¿Eliminar esta categoría y todas sus cuotas?');">Eliminar</a>
+                <?php endif; ?>
+            </div>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
+<?php require __DIR__ . '/layout/footer.phtml'; ?>

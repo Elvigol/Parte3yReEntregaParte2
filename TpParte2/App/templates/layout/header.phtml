@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="<?= BASE_URL ?>">
+    <link rel="stylesheet" href="css/style.css">
+    <title><?= $pageTitle ?? 'Planes de Cuotas' ?></title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="home">Inicio</a></li>
+            <li><a href="categorias">Planes</a></li>
+            <li><a href="items"> Cuotas</a></li>
+            <li><a href="clientes">Clientes</a></li>
+            <?php if (!empty($isLogged)): ?>
+                <li><a href="logout">Cerrar sesión</a></li>
+            <?php else: ?>
+                <li><a href="login">Login Admin</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+    <div class="contenedor-principal">

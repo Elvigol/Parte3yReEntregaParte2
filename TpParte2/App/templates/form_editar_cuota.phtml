@@ -1,0 +1,58 @@
+<?php
+$pageTitle = 'Editar Cuota';
+require __DIR__ . '/layout/header.phtml';
+?>
+
+<div class="contenedor-formulario">
+    <h2 class="titulo-principal">Editar Cuota</h2>
+
+    <form action="<?= BASE_URL ?>update-item/<?= $cuota->id_cuota ?>" method="POST" class="formulario-alta">
+
+        <div class="grupo-form">
+            <label for="id_plan">Categoría (Plan de Cuotas):</label>
+            <select id="id_plan" name="id_plan" required>
+                <?php foreach ($planes as $plan): ?>
+                    <option value="<?= $plan->id_plan ?>" <?= $plan->id_plan == $cuota->id_plan ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($plan->nombre) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="grupo-form">
+            <label for="id_cliente">Cliente:</label>
+            <select id="id_cliente" name="id_cliente" required>
+                <?php foreach ($clientes as $cliente): ?>
+                    <option value="<?= $cliente->id_cliente ?>" <?= $cliente->id_cliente == $cuota->id_cliente ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($cliente->nombre) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="grupo-form">
+            <label for="nro_cuota">Número de cuota:</label>
+            <input type="number" id="nro_cuota" name="nro_cuota" min="1" value="<?= htmlspecialchars($cuota->nro_cuota) ?>" required>
+        </div>
+
+        <div class="grupo-form">
+            <label for="monto">Monto ($):</label>
+            <input type="number" step="0.01" id="monto" name="monto" value="<?= htmlspecialchars($cuota->monto) ?>" required>
+        </div>
+
+        <div class="grupo-form grupo-checkbox">
+            <label for="estado_pago">¿Está pagada?</label>
+            <input type="checkbox" id="estado_pago" name="estado_pago" <?= $cuota->estado_pago ? 'checked' : '' ?>>
+        </div>
+
+        <div class="grupo-form">
+            <label for="imagen_url">Imagen (URL, opcional):</label>
+            <input type="url" id="imagen_url" name="imagen_url" value="<?= htmlspecialchars($cuota->imagen_url ?? '') ?>" placeholder="https://...">
+        </div>
+
+        <button type="submit" class="boton-agregar">Guardar Cambios</button>
+        <a href="<?= BASE_URL ?>items" class="enlace-cancelar">Cancelar y volver al listado</a>
+    </form>
+</div>
+
+<?php require __DIR__ . '/layout/footer.phtml'; ?>

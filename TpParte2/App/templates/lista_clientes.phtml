@@ -1,0 +1,33 @@
+<?php
+$pageTitle = 'Clientes';
+require __DIR__ . '/layout/header.phtml';
+?>
+
+<h1 class="titulo-principal">Clientes</h1>
+
+<?php if ($isLogged): ?>
+    <a href="<?= BASE_URL ?>nuevo-cliente" class="boton-agregar">Agregar nuevo cliente</a>
+<?php endif; ?>
+
+<ul class="lista-planes">
+    <?php foreach ($clientes as $cliente): ?>
+        <li class="item-plan">
+            <?php if (!empty($cliente->imagen_url)): ?>
+                <img src="<?= htmlspecialchars($cliente->imagen_url) ?>" alt="<?= htmlspecialchars($cliente->nombre) ?>" class="imagen-miniatura">
+            <?php endif; ?>
+            <div class="info-plan">
+                <span class="nombre-categoria"><?= htmlspecialchars($cliente->nombre) ?></span>
+                <p><?= htmlspecialchars($cliente->email) ?></p>
+            </div>
+            <div class="acciones">
+                <a href="<?= BASE_URL ?>cliente/<?= $cliente->id_cliente ?>" class="enlace-detalle">Ver sus cuotas</a>
+                <?php if ($isLogged): ?>
+                    <a href="<?= BASE_URL ?>editar-cliente/<?= $cliente->id_cliente ?>" class="boton-editar">Editar</a>
+                    <a href="<?= BASE_URL ?>eliminar-cliente/<?= $cliente->id_cliente ?>" class="boton-eliminar" onclick="return confirm('¿Eliminar este cliente?');">Eliminar</a>
+                <?php endif; ?>
+            </div>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
+<?php require __DIR__ . '/layout/footer.phtml'; ?>

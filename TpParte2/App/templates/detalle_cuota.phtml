@@ -1,0 +1,24 @@
+<?php
+$pageTitle = 'Cuota Nº ' . $cuota->nro_cuota;
+require __DIR__ . '/layout/header.phtml';
+?>
+
+<div class="contenedor-detalle-particular">
+    <?php if (!empty($cuota->imagen_url)): ?>
+        <img src="<?= htmlspecialchars($cuota->imagen_url) ?>" alt="Cuota" class="imagen-detalle">
+    <?php endif; ?>
+    <h1 class="titulo-principal">Cuota Nº <?= htmlspecialchars($cuota->nro_cuota) ?></h1>
+
+    <p>
+        Categoría:
+        <a href="<?= BASE_URL ?>categoria/<?= $cuota->id_plan ?>"><?= htmlspecialchars($cuota->nombre_plan) ?></a>
+    </p>
+    <p>Cliente: <?= htmlspecialchars($cuota->nombre_cliente) ?></p>
+    <p>Estado: <?= $cuota->estado_pago ? 'Pagada' : 'Pendiente' ?></p>
+
+    <span class="monto-detalle">$<?= htmlspecialchars($cuota->monto) ?></span>
+</div>
+
+<a href="<?= BASE_URL ?>items" class="enlace-cancelar">Volver al listado de ítems</a>
+
+<?php require __DIR__ . '/layout/footer.phtml'; ?>

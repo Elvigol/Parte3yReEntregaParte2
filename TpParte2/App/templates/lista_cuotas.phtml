@@ -1,0 +1,46 @@
+<?php
+$pageTitle = 'Ítems (Cuotas)';
+require __DIR__ . '/layout/header.phtml';
+?>
+
+<h1 class="titulo-principal">Todas las Cuotas</h1>
+
+<?php if ($isLogged): ?>
+    <a href="<?= BASE_URL ?>nuevo-item" class="boton-agregar">Agregar nueva cuota</a>
+<?php endif; ?>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nro. cuota</th>
+            <th>Categoría</th>
+            <th>Cliente</th>
+            <th>Monto</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($cuotas as $cuota): ?>
+            <tr>
+                <td><?= htmlspecialchars($cuota->nro_cuota) ?></td>
+                <td>
+                    <!-- Siempre se muestra el nombre de la categoría a la que pertenece -->
+                    <a href="<?= BASE_URL ?>categoria/<?= $cuota->id_plan ?>"><?= htmlspecialchars($cuota->nombre_plan) ?></a>
+                </td>
+                <td><?= htmlspecialchars($cuota->nombre_cliente) ?></td>
+                <td>$<?= htmlspecialchars($cuota->monto) ?></td>
+                <td><?= $cuota->estado_pago ? 'Pagada' : 'Pendiente' ?></td>
+                <td class="acciones">
+                    <a href="<?= BASE_URL ?>item/<?= $cuota->id_cuota ?>" class="enlace-detalle">Ver</a>
+                    <?php if ($isLogged): ?>
+                        <a href="<?= BASE_URL ?>editar-item/<?= $cuota->id_cuota ?>" class="boton-editar">Editar</a>
+                        <a href="<?= BASE_URL ?>eliminar-item/<?= $cuota->id_cuota ?>" class="boton-eliminar" onclick="return confirm('¿Eliminar esta cuota?');">Eliminar</a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<?php require __DIR__ . '/layout/footer.phtml'; ?>

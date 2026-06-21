@@ -1,0 +1,31 @@
+<?php
+$pageTitle = 'Agregar Nuevo Cliente';
+require __DIR__ . '/layout/header.phtml';
+?>
+
+<div class="contenedor-formulario">
+    <h2 class="titulo-principal">Alta de Nuevo Cliente</h2>
+
+    <form action="<?= BASE_URL ?>add-cliente" method="POST" class="formulario-alta">
+
+        <div class="grupo-form">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+        </div>
+
+        <div class="grupo-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="grupo-form">
+            <label for="imagen_url">Imagen (URL, opcional):</label>
+            <input type="url" id="imagen_url" name="imagen_url" placeholder="https://...">
+        </div>
+
+        <button type="submit" class="boton-agregar">Guardar Cliente</button>
+        <a href="<?= BASE_URL ?>clientes" class="enlace-cancelar">Cancelar y volver al listado</a>
+    </form>
+</div>
+
+<?php require __DIR__ . '/layout/footer.phtml'; ?>

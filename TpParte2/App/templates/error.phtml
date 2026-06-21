@@ -1,0 +1,13 @@
+<?php
+$pageTitle = 'Error';
+$isLogged = $_SESSION['IS_LOGGED'] ?? false;
+require __DIR__ . '/layout/header.phtml';
+?>
+
+<div class="contenedor-formulario mensaje-error-caja">
+    <h2 class="titulo-principal">Ocurrió un error</h2>
+    <p><?= htmlspecialchars($mensaje) ?></p>
+    <a href="<?= BASE_URL ?>home" class="enlace-cancelar">Volver al inicio</a>
+</div>
+
+<?php require __DIR__ . '/layout/footer.phtml'; ?>
